@@ -2,12 +2,12 @@
 
 ## Introduction
 
-This project is inspired by my father's daily job as a truck driver. It manages the truck driver’s transport information and it provides functions to summarize, add, modify, and search transportation records or stores. It utlizes a csv file to store different stores infomation which includes the ID, city, address, and phone number. To store daily transportation record, it generate a txt file which includes Trip ID, Trailer ID, Bill ID, the weight of this trailer, and store information.
+This project is inspired by my father's daily job as a truck driver. It manages the truck driver’s transport information and it provides functions to summarize, add, modify, and search transportation records or stores. It utilizes a csv file to store different stores' information which includes the ID, city, address, and phone number. To store the daily transportation record, it generates a txt file which includes Trip ID, Trailer ID, Bill ID, the weight of this trailer, and store information.
 
 
 # Library
 
-There are two external Java libraries utlized in this project which are commons-lang3-3.11 and opencsv-5.2.In order to run this project, these two libraries are required. 
+There are two external Java libraries utilized in this project which are commons-lang3-3.11 and opencsv-5.2.In order to run this project, these two libraries are required. 
 
 If you're using Maven, one way to do is to add it as a dependency in pom.xml file.
 
