@@ -252,10 +252,10 @@ public class History {
 
             outputStream.println(str);
             outputStream.println("");
-            outputStream.println("Trip ID : " + Trip);
-            outputStream.println("Trailer ID : " + trailer);
-            outputStream.println("Bill ID : " + Bill);
-            outputStream.println("Weight ID : " + trailerWeight);
+            outputStream.println("Trip ID: " + Trip);
+            outputStream.println("Trailer ID: " + trailer);
+            outputStream.println("Bill ID: " + Bill);
+            outputStream.println("Weight: " + trailerWeight);
 
             for (int i = 1; i <= stores; i++) {
                 System.out.println("What is the Store ID for Stop " + i + " ?");

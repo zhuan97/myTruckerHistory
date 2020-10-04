@@ -1,9 +1,9 @@
 1.01
 
-Trip ID : 123456
-Trailer ID : 1234
-Bill ID : 12345678
-Weight ID : 10000
+Trip ID: 123456
+Trailer ID: 1234
+Bill ID: 12345678
+Weight: 10000
 
 Store 1 :
 ID : 001
