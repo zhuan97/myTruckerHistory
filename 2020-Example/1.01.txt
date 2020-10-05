@@ -7,12 +7,14 @@ Weight: 10000
 
 Store 1 :
 ID : 001
-City : San-Jose,CA
 Address  : N-1st-St
+City : San-Jose
+State : CA
 Phone : 123-456-7890
 
 Store 2 :
 ID : 002
-City : San-Francisco,CA
 Address  : 1-Main-St
+City : San-Francisco
+State : CA
 Phone : 987-654-3210

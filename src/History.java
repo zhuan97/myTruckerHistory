@@ -17,6 +17,7 @@ public class History {
 
     public static final String Store_FILE = "StoreInfo.csv";
 
+    // Main
     public static void main(String[] args) throws IOException, CsvException {
 
         Scanner keyboard = new Scanner(System.in);
@@ -59,11 +60,12 @@ public class History {
 
                     String storeline = checkCSV(storeID);
                     if (!storeline.equals("NS")) {
-                        String storefields[] = storeline.split(",");
-                        System.out.println("Store " + storefields[0].replace("\"", "") + " :");
-                        System.out.println("The City of Store is " + storefields[1].replace("\"", "")+ ".");
-                        System.out.println("The address of Store is " + storefields[2].replace("\"", "")+ ".");
-                        System.out.println("The phone number of Store is " + storefields[3].replace("\"", "")+ ".");
+                        String storefields[] = storeline.split(",");     
+                        System.out.println("Store " + storefields[0].replace("\"", "") + " :");               
+                        System.out.println("The address of Store " + storeID +" is " + storefields[1].replace("\"", "")+ ".");
+                        System.out.println("The City of Store " + storeID +" is " + storefields[2].replace("\"", "")+ ".");
+                        System.out.println("The State of Store " + storeID +" is " + storefields[3].replace("\"", "")+ ".");
+                        System.out.println("The phone number of Store " + storeID +" is " + storefields[4].replace("\"", "")+ ".");
                     }else{
                         System.out.println("There isn't a store with ID "+storeID+" on file.");
                     }
@@ -78,7 +80,7 @@ public class History {
                     break;
 
                 case "add":
-                    System.out.println(addManifest());
+                    System.out.println(addRecord());
                     break;
 
                 default:
@@ -95,6 +97,7 @@ public class History {
         keyboard.close();
     }
 
+    // Total Store function
     private static int totalStore() {
 		int totalStore = 0;
 		
@@ -155,6 +158,7 @@ public class History {
 		return totalStore;
 	}
 
+    // Total Store without duplicate function
     private static int totalStoresWithoutDuplicate() {
         int StoreNum = 0;
 
@@ -175,6 +179,7 @@ public class History {
         return StoreNum;
     }
 
+    // View stored record function
     private static String view(int year, double date) {
         String fileName = year + "\\\\" + date + ".txt";
         File checkFile = new File(fileName);
@@ -190,7 +195,7 @@ public class History {
                 System.exit(0);
             }
 
-            System.out.println("This is the manifest for " + date + " in " + year);
+            System.out.println("This is the record for " + date + " in " + year);
             while (inputStream.hasNextLine()) {
                 String text = inputStream.nextLine();
                 System.out.println(text);
@@ -202,7 +207,8 @@ public class History {
         return null;
     }
 
-    private static String addManifest() throws IOException ,CsvException{
+    // Add new delivery record function
+    private static String addRecord() throws IOException ,CsvException{
         String Trip, Bill, trailerWeight, trailer;
         double stores, date;
         int year;
@@ -245,9 +251,10 @@ public class History {
         try {
             outputStream = new PrintWriter(fileName);
 
-            String store;
-            String city ;
+            String storeID;
             String address;
+            String city;
+            String state;
             String phone;
 
             outputStream.println(str);
@@ -258,52 +265,67 @@ public class History {
             outputStream.println("Weight: " + trailerWeight);
 
             for (int i = 1; i <= stores; i++) {
-                System.out.println("What is the Store ID for Stop " + i + " ?");
-                store = input.next();
 
-                String line = checkCSV(store);
+                Store newStore = null;
+
+                System.out.println("What is the Store ID for Stop " + i + " ?");
+                storeID = input.next();
+
+                String line = checkCSV(storeID);
                 
                 if (!line.equals("NS")) {
                     String fields[] = line.split(",");
-                    System.out.println("The City of Store " + store +" is " + fields[1].replace("\"", ""));
-                    System.out.println("The address of Store " + store +" is " + fields[2].replace("\"", ""));
-                    System.out.println("The phone number of Store " + store +" is " + fields[3].replace("\"", ""));
+                    System.out.println("The address of Store " + storeID +" is " + fields[1].replace("\"", ""));
+                    System.out.println("The City of Store " + storeID +" is " + fields[2].replace("\"", ""));
+                    System.out.println("The State of Store " + storeID +" is " + fields[3].replace("\"", ""));
+                    System.out.println("The phone number of Store " + storeID +" is " + fields[4].replace("\"", ""));
                     System.out.println("Are these info correct?(Y/N)");
                     if (input.next().charAt(0) == 'Y') {
-                        city = fields[1].replace("\"", "");
-                        address = fields[2].replace("\"", "");
-                        phone = fields[3].replace("\"", "");
+                        address = fields[1].replace("\"", "");
+                        city = fields[2].replace("\"", "");
+                        state = fields[3].replace("\"", "");
+                        phone = fields[4].replace("\"", "");
                     } else {
-                        System.out.println("What is the City of Store " + i + " ?");
-                        city = input.next();
-
                         System.out.println("What is the address of Store " + i + " ? (use '-' instead of space)");
                         address = input.next();
 
+                        System.out.println("What is the City of Store " + i + " ?");
+                        city = input.next();
+
+                        System.out.println("What is the State of Store " + i + " ?");
+                        state = input.next();
+
                         System.out.println("What is the phone number of Store " + i + " ?");
                         phone = input.next();
-                        deleteCSV(store);
-                        addCSV(store, city, address, phone);
+
+                        newStore = new Store(storeID,address,city,state,phone);
+                        deleteCSV(storeID);
+                        addCSV(newStore);
 
                     }
                 }
                 else {
-                    System.out.println("What is the City of this Store " + i + " ?");
-                    city = input.next();
-
                     System.out.println("What is the address of Store " + i + " ? (use '-' instead of space)");
                     address = input.next();
 
+                    System.out.println("What is the City of Store " + i + " ?");
+                    city = input.next();
+
+                    System.out.println("What is the State of Store " + i + " ?");
+                    state = input.next();
+
                     System.out.println("What is the phone number of Store " + i + " ?");
                     phone = input.next();
-                    addCSV(store, city, address, phone);
+                    newStore = new Store(storeID,address,city,state,phone);
+                    addCSV(newStore);
                 }
 
                 outputStream.println("");
                 outputStream.println("Store " + i + " :");
-                outputStream.println("ID : " + store);
-                outputStream.println("City : " + city);
+                outputStream.println("ID : " + storeID);
                 outputStream.println("Address  : " + address);
+                outputStream.println("City : " + city);
+                outputStream.println("State : " + state);
                 outputStream.println("Phone : " + phone);
 
             }
@@ -316,9 +338,10 @@ public class History {
         }
 
         outputStream.close();
-        return "The new manifest has successfully created.";
+        return "The new record has been successfully created.";
     }
 
+    // Function to create a new csv file 
     private static void createCSV() throws IOException{
         File file = new File(Store_FILE);
 
@@ -326,22 +349,24 @@ public class History {
 
         CSVWriter createwriter = new CSVWriter(outputfile);
 
-        String[] header = { "Store ID", "City", "Address", "Phone" };
+        String[] header = { "Store ID", "Address","City", "State", "Phone" };
         createwriter.writeNext(header);
 
         createwriter.close();
     }
 
-    private static void addCSV(String ID, String address, String city, String phone) throws IOException {
+    // Function to add a new store info in csv
+    private static void addCSV(Store newStore) throws IOException {
         CSVWriter addwriter = new CSVWriter(new FileWriter(Store_FILE, true));
 
-        String[] record = (ID + "," + address + "," + city + "," + phone).split(",");
+        String[] record = {newStore.getId(), newStore.getAddress(), newStore.getCity(),newStore.getState(),newStore.getPhone()};
 
         addwriter.writeNext(record);
 
         addwriter.close();
     }
 
+    // Function to check the stored store info in csv
     private static String checkCSV(String ID) {
         Scanner checkinput = null;
         try {
@@ -351,18 +376,17 @@ public class History {
         }
        
         while (checkinput.hasNextLine()) {
-            
             String line = checkinput.nextLine();
             String fields[] = line.split(",");
             
             if (fields[0].replace("\"", "").equals(ID)){
                 return line;
-            }
-            
+            } 
         }
         return "NS";
     }
 
+    // Function to delete a stored store info in csv
     private static void deleteCSV(String ID) throws IOException, CsvException {
         int rowNumber = 0;
 
@@ -374,7 +398,6 @@ public class History {
         }
        
         while (deleteinput.hasNextLine()) {
-            
             String line = deleteinput.nextLine();
             String fields[] = line.split(",");
             
@@ -383,7 +406,6 @@ public class History {
             }
             rowNumber++;
         }
-
         CSVReader deletereader = new CSVReader(new FileReader(Store_FILE));
         List<String[]> allElements = deletereader.readAll();
         allElements.remove(rowNumber);
@@ -391,7 +413,5 @@ public class History {
         CSVWriter deletewriter = new CSVWriter(sw);
         deletewriter.writeAll(allElements);
         deletewriter.close();
-
     }
-
 }
