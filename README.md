@@ -7,7 +7,7 @@ This project is inspired by my father's daily job as a truck driver. It manages 
 
 # Library
 
-There are two external Java libraries utilized in this project which are commons-lang3-3.11 and opencsv-5.2.In order to run this project, these two libraries are required. 
+There are two external Java libraries utilized in this project which are commons-lang3-3.11 and opencsv-5.2. In order to run this project, these two libraries are required. 
 
 If you're using Maven, one way to do is to add it as a dependency in the pom.xml file.
 
@@ -29,7 +29,7 @@ For opencsv-5.2
 </dependency>
 ```
 
-For VScode users, it can be done through the User Interface. I recommend checking the visual studio document website. Link: https://code.visualstudio.com/docs/java/java-project
+For VScode users, it can be done through the User Interface. I recommend checking the visual studio docs website. Link: https://code.visualstudio.com/docs/java/java-project
 
 For Eclipse users, it can be done by right-clicking on the Project → Build Path → Configure Build Path. Under the Libraries tab, click Add Jars or Add External JARs and give the Jar.[1]
 
