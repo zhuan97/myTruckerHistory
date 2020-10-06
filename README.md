@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This project is inspired by my father's daily job as a truck driver. It manages the truck driver’s transport information and it provides functions to summarize, add, modify, and search transportation records or stores. It utilizes a csv file to store different stores' information which includes the ID, city, address, and phone number. To store the daily transportation record, it generates a txt file which includes Trip ID, Trailer ID, Bill ID, the weight of this trailer, and store information.
+This project is inspired by my father's daily job as a truck driver. It manages the truck driver’s transport information and it provides functions to summarize, add, modify, and search transportation records or stores. It utilizes a csv file to store different stores' information which includes the ID, address, city, state, and phone number. To store the daily transportation record, it generates a txt file which includes Trip ID, Trailer ID, Bill ID, the weight of this trailer, and store information.
 
 
 # Library
